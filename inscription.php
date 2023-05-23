@@ -1,8 +1,8 @@
 <?php
 // Connexion à la base de données
 $servername = "localhost";
-$username = "root"; // Remplacez par votre nom d'utilisateur
-$password = "Romain-1964"; // Remplacez par votre mot de passe
+$username = "root"; 
+$password = "Romain-1964"; 
 $dbname = "moduleconnexion";
 
 try {
@@ -25,8 +25,17 @@ try {
             exit;
         }
 
-        // Hacher le mot de passe
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        // Vérifier les contraintes du mot de passe
+        if (
+            strlen($password) < 8 ||
+            !preg_match('/[A-Z]/', $password) ||
+            !preg_match('/[a-z]/', $password) ||
+            !preg_match('/\d/', $password) ||
+            !preg_match('/[^A-Za-z\d]/', $password)
+        ) {
+            echo "Le mot de passe ne respecte pas les contraintes";
+            exit;
+        }
 
         // Vérifier si le login existe déjà
         $stmt = $conn->prepare("SELECT * FROM utilisateurs WHERE login = :login");
@@ -38,6 +47,9 @@ try {
             exit;
         }
 
+        // Hacher le mot de passe
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
         // Insérer l'utilisateur dans la base de données
         $stmt = $conn->prepare("INSERT INTO utilisateurs (login, prenom, nom, password) VALUES (:login, :prenom, :nom, :password)");
         $stmt->bindParam(':login', $login);
@@ -45,8 +57,13 @@ try {
         $stmt->bindParam(':nom', $nom);
         $stmt->bindParam(':password', $hashed_password);
 
-        $stmt->execute();
-        echo "Inscription réussie";
+        if ($stmt->execute()) {
+            // Redirection vers la page de connexion
+            header("Location: connexion.php");
+            exit;
+        } else {
+            echo "Erreur lors de l'inscription";
+        }
     }
 } catch(PDOException $e) {
     echo "Erreur: " . $e->getMessage();
@@ -55,15 +72,11 @@ try {
 $conn = null;
 ?>
 
-
 <!DOCTYPE html>
 <html>
 <head>
     <title>Inscription</title>
     <link rel="stylesheet" type="text/css" href="CSS/style.css">
-
-
-
 </head>
 <body>
     <h1>Inscription</h1>
