@@ -1,17 +1,11 @@
 <?php
 // Connexion à la base de données
 $servername = "localhost";
-$username = "root"; // Remplacez par votre nom d'utilisateur
-$password = "Romain-1964"; // Remplacez par votre mot de passe
+$username = "root"; 
+$password = "Romain-1964"; 
 $dbname = "moduleconnexion";
 
 session_start();
-
-// Si l'utilisateur est déjà connecté, rediriger vers la page de profil
-//    if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
-//        header("Location: index.php");
-//        exit;
-//   }
 
 try {
     // Créer une connexion
@@ -41,8 +35,12 @@ try {
                 $_SESSION['prenom'] = $row['prenom'];
                 $_SESSION['nom'] = $row['nom'];
 
-                // Rediriger vers la page de profil
-                header("Location: profil.php");
+                // Rediriger vers la page de profil ou la page d'admin en fonction du login
+                if ($_SESSION['login'] === 'admin') {
+                    header("Location: admin.php");
+                } else {
+                    header("Location: profil.php");
+                }
                 exit;
             } else {
                 echo "Mot de passe incorrect";
@@ -57,6 +55,9 @@ try {
 
 $conn = null;
 ?>
+
+<!-- Reste du code HTML... -->
+
 
 <!DOCTYPE html>
 <html>
