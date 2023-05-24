@@ -59,20 +59,18 @@ $conn = null;
     <link rel="stylesheet" type="text/css" href="CSS/style.css">
 </head>
 <body>
-    <h1>Profil</h1>
-    <form method="POST" action="profil.php">
-        <label for="login">Login:</label>
-        <input type="text" id="login" name="login" value="<?php echo $_SESSION['login']; ?>" disabled>
-        <label for="prenom">Prénom:</label>
-        <input type="text" id="prenom" name="prenom" value="<?php echo $_SESSION['prenom']; ?>">
-        <label for="nom">Nom:</label>
-        <input type="text" id="nom" name="nom" value="<?php echo $_SESSION['nom']; ?>">
-        <input type="submit" value="Mettre à jour">
-    </form>
-    <?php
-    if ($_SESSION['login'] === 'admin') {
-        echo '<a href="admin.php">Page d\'administration</a>';
-    }
-    ?>
+    <div class="container">
+        <h1>Profil</h1>
+        <form method="POST" action="profil.php">
+            <label for="login">Login:</label>
+            <input type="text" id="login" name="login" value="<?php echo $_SESSION['login']; ?>">
+            <label for="prenom">Prénom:</label>
+            <input type="text" id="prenom" name="prenom" value="<?php echo $_SESSION['prenom']; ?>">
+            <label for="nom">Nom:</label>
+            <input type="text" id="nom" name="nom" value="<?php echo $_SESSION['nom']; ?>">
+            <input type="submit" value="Mettre à jour">
+        </form>
+    </div>
 </body>
 </html>
+

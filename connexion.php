@@ -66,13 +66,16 @@ $conn = null;
     <link rel="stylesheet" type="text/css" href="CSS/style.css">
 </head>
 <body>
-    <h1>Connexion</h1>
-    <form method="POST" action="connexion.php">
-        <label for="login">Login:</label>
-        <input type="text" id="login" name="login">
-        <label for="password">Mot de passe:</label>
-        <input type="password" id="password" name="password">
-        <input type="submit" value="Se connecter">
-    </form>
+    <div class="container">
+        <h1>Connexion</h1>
+        <form method="POST" action="connexion.php">
+            <label for="login">Login:</label>
+            <input type="text" id="login" name="login">
+            <label for="password">Mot de passe:</label>
+            <input type="password" id="password" name="password">
+            <input type="submit" value="Se connecter">
+        </form>
+    </div>
 </body>
 </html>
+
