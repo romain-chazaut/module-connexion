@@ -76,22 +76,25 @@ $conn = null;
 <html>
 <head>
     <title>Inscription</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="CSS/style.css">
 </head>
 <body>
-    <h1>Inscription</h1>
-    <form method="POST" action="inscription.php">
-        <label for="login">Login:</label>
-        <input type="text" id="login" name="login">
-        <label for="prenom">Prénom:</label>
-        <input type="text" id="prenom" name="prenom">
-        <label for="nom">Nom:</label>
-        <input type="text" id="nom" name="nom">
-        <label for="password">Mot de passe:</label>
-        <input type="password" id="password" name="password">
-        <label for="confirm_password">Confirmer le mot de passe:</label>
-        <input type="password" id="confirm_password" name="confirm_password">
-        <input type="submit" value="S'inscrire">
-    </form>
+    <div class="container">
+        <h1>Inscription</h1>
+        <form method="POST" action="inscription.php">
+            <label for="login">Login:</label>
+            <input type="text" id="login" name="login">
+            <label for="prenom">Prénom:</label>
+            <input type="text" id="prenom" name="prenom">
+            <label for="nom">Nom:</label>
+            <input type="text" id="nom" name="nom">
+            <label for="password">Mot de passe:</label>
+            <input type="password" id="password" name="password">
+            <label for="confpassword">Confirmer le mot de passe:</label>
+            <input type="password" id="confpassword" name="confpassword">
+            <input type="submit" value="S'inscrire">
+        </form>
+    </div>
 </body>
 </html>
+
