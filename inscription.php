@@ -17,7 +17,7 @@ try {
         $prenom = $_POST['prenom'];
         $nom = $_POST['nom'];
         $password = $_POST['password'];
-        $confirm_password = $_POST['confirm_password'];
+        $confirm_password = $_POST['confpassword'];
 
         // Vérifier que les mots de passe correspondent
         if ($password != $confirm_password) {
