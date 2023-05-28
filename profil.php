@@ -74,7 +74,7 @@ try {
             $success = "Informations mises à jour avec succès";
         }
     }
-} catch(PDOException $e) {
+} catch (PDOException $e) {
     $errors[] = "Erreur: " . $e->getMessage();
 }
 
@@ -91,15 +91,15 @@ $conn = null;
     <div class="container">
         <h1>Profil</h1>
 
-        <?php if (!empty($errors)): ?>
-            <div class="error-message">
-                <?php foreach ($errors as $error): ?>
+        <?php if (!empty($errors)) : ?>
+            <div class="errors">
+                <?php foreach ($errors as $error) : ?>
                     <p><?php echo $error; ?></p>
                 <?php endforeach; ?>
             </div>
         <?php endif; ?>
 
-        <?php if (!empty($success)): ?>
+        <?php if (!empty($success)) : ?>
             <div class="success-message">
                 <p><?php echo $success; ?></p>
             </div>
@@ -118,8 +118,8 @@ $conn = null;
             <input type="password" id="new_password" name="new_password">
             <label for="confirm_password">Confirmer le nouveau mot de passe:</label>
             <input type="password" id="confirm_password" name="confirm_password"><br>
-            <input type="submit" value="Mettre à jour">
-            <a href="index.php" class="button center-button">Retour à l'accueil</a>
+            <input type="submit" value="Mettre à jour" class="button"><br>
+            <a href="index.php" class="button">Retour à l'accueil</a>
         </form>
     </div>
 </body>

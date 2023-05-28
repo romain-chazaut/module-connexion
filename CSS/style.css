@@ -33,34 +33,9 @@ input {
     border: 1px solid #ddd;
 }
 
-input[type="submit"] {
-    cursor: pointer;
-    background-color: #007BFF;
-    color: #fff;
-    border: none;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-table, th, td {
-    border: 1px solid #ddd;
-}
-
-th, td {
-    padding: 10px;
-    text-align: left;
-}
-
-th {
-    background-color: #007BFF79;
-    color: white;
-}
-
+input[type="submit"],
 .button {
-    margin-top: 20px;
+    cursor: pointer;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
@@ -68,9 +43,16 @@ th {
     color: white;
     text-decoration: none;
     display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
+input[type="submit"]:hover,
+.button:hover {
+    background-color: #0056b3;
+}
 
 .buttons {
     display: flex;
@@ -88,20 +70,7 @@ th {
 }
 
 .custom-button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    text-decoration: none;
-    text-align: center;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-}
-
-.custom-button:hover {
-    background-color: #0056b3;
+    width: 150px;
 }
 
 .center-button {

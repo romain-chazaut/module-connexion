@@ -1,8 +1,8 @@
 <?php
 // Connexion à la base de données
 $servername = "localhost";
-$username = "root"; 
-$password = "Romain-1964"; 
+$username = "root";
+$password = "Romain-1964";
 $dbname = "moduleconnexion";
 
 $errors = array();
@@ -47,7 +47,7 @@ try {
         }
 
         // Si aucune erreur n'est présente, procéder à l'inscription
-        if(empty($errors)){
+        if (empty($errors)) {
             // Hacher le mot de passe
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
@@ -67,7 +67,7 @@ try {
             }
         }
     }
-} catch(PDOException $e) {
+} catch (PDOException $e) {
     $errors[] = "Erreur: " . $e->getMessage();
 }
 
@@ -83,13 +83,13 @@ $conn = null;
 <body>
     <div class="container">
         <h1>Inscription</h1>
-        <?php if (!empty($errors)): ?>
-        <div class="errors">
-            <?php foreach ($errors as $error): ?>
-                <p><?php echo $error; ?></p>
-            <?php endforeach; ?>
-        </div>
-    <?php endif; ?>
+        <?php if (!empty($errors)) : ?>
+            <div class="errors">
+                <?php foreach ($errors as $error) : ?>
+                    <p><?php echo $error; ?></p>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
         <form method="POST" action="inscription.php">
             <label for="login">Login:</label>
             <input type="text" id="login" name="login">
@@ -101,11 +101,9 @@ $conn = null;
             <input type="password" id="password" name="password">
             <label for="confpassword">Confirmer le mot de passe:</label>
             <input type="password" id="confpassword" name="confpassword"><br>
-            <input type="submit" value="S'inscrire" class="custom-button"><br>
-            <a href="index.php" class="custom-button">Retour à l'accueil</a>
+            <input type="submit" value="S'inscrire" class="button"><br>
+            <a href="index.php" class="button">Retour à l'accueil</a>
         </form>
     </div>
 </body>
 </html>
-
-

@@ -27,22 +27,17 @@ if (isset($_GET['logout'])) {
 <body>
     <div class="container">
         <h1>Bienvenue sur mon site !</h1>
-        <p>Ce site vous permet de créer un compte, de vous connecter et de modifier vos informations personnelles.</p>
 
-        <?php
-        // Vérifier si l'utilisateur est connecté
-        if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
-            echo '<p>Connecté en tant que ' . $_SESSION['login'] . '</p>';
-            echo '<a href="?logout" class="button custom-button">Déconnexion</a>';
-        } else {
-            // Afficher les boutons d'inscription et de connexion dans un div de classe 'buttons'
-            echo '<div class="buttons">';
-            echo '<a href="inscription.php" class="button custom-button">Inscription</a>';
-            echo '<a href="connexion.php" class="button custom-button">Connexion</a>';
-            echo '</div>';
-        }
-        ?>
+        <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) : ?>
+            <p>Connecté en tant que <?php echo $_SESSION['login']; ?></p>
+            <a href="?logout" class="button">Déconnexion</a><br>
+            <a href="profil.php" class="button">Profil</a>
+        <?php else : ?>
+            <div class="buttons">
+                <a href="inscription.php" class="button">Inscription</a><br>
+                <a href="connexion.php" class="button">Connexion</a>
+            </div>
+        <?php endif; ?>
     </div>
 </body>
 </html>
-

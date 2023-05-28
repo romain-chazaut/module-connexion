@@ -1,8 +1,8 @@
 <?php
 // Connexion à la base de données
 $servername = "localhost";
-$username = "root"; 
-$password = "Romain-1964"; 
+$username = "root";
+$password = "Romain-1964";
 $dbname = "moduleconnexion";
 
 session_start();
@@ -51,7 +51,7 @@ try {
             $errors[] = "Login incorrect";
         }
     }
-} catch(PDOException $e) {
+} catch (PDOException $e) {
     $errors[] = "Erreur: " . $e->getMessage();
 }
 
@@ -67,15 +67,21 @@ $conn = null;
 <body>
     <div class="container">
         <h1>Connexion</h1>
+        <?php if (!empty($errors)) : ?>
+            <div class="errors">
+                <?php foreach ($errors as $error) : ?>
+                    <p><?php echo $error; ?></p>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
         <form method="POST" action="connexion.php">
             <label for="login">Login:</label>
             <input type="text" id="login" name="login">
             <label for="password">Mot de passe:</label>
             <input type="password" id="password" name="password"><br>
-            <input type="submit" value="Se connecter" class="custom-button">
-            <a href="index.php" class="button custom-button">Retour à l'accueil</a>
+            <input type="submit" value="Se connecter" class="button"><br>
+            <a href="index.php" class="button">Retour à l'accueil</a>
         </form>
     </div>
 </body>
 </html>
-
