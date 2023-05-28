@@ -22,7 +22,6 @@ if (isset($_GET['logout'])) {
 <html>
 <head>
     <title>Mon Site</title>
-    <!-- Lien vers votre fichier CSS externe -->
     <link rel="stylesheet" type="text/css" href="CSS/style.css">
 </head>
 <body>
@@ -34,15 +33,16 @@ if (isset($_GET['logout'])) {
         // Vérifier si l'utilisateur est connecté
         if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
             echo '<p>Connecté en tant que ' . $_SESSION['login'] . '</p>';
-            echo '<a href="?logout" class="button">Déconnexion</a>';
+            echo '<a href="?logout" class="button custom-button">Déconnexion</a>';
         } else {
             // Afficher les boutons d'inscription et de connexion dans un div de classe 'buttons'
             echo '<div class="buttons">';
-            echo '<a href="inscription.php" class="button">Inscription</a>';
-            echo '<a href="connexion.php" class="button">Connexion</a>';
+            echo '<a href="inscription.php" class="button custom-button">Inscription</a>';
+            echo '<a href="connexion.php" class="button custom-button">Connexion</a>';
             echo '</div>';
         }
         ?>
     </div>
 </body>
 </html>
+

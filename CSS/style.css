@@ -35,7 +35,7 @@ input {
 
 input[type="submit"] {
     cursor: pointer;
-    background-color: #009879;
+    background-color: #007BFF;
     color: #fff;
     border: none;
 }
@@ -55,7 +55,7 @@ th, td {
 }
 
 th {
-    background-color: #009879;
+    background-color: #007BFF79;
     color: white;
 }
 
@@ -64,16 +64,13 @@ th {
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    background-color: #009879;
+    background-color: #007BFF;
     color: white;
     text-decoration: none;
     display: flex;
     cursor: pointer;
 }
 
-.button:hover {
-    background-color: #007b63;
-}
 
 .buttons {
     display: flex;
@@ -82,3 +79,33 @@ th {
     margin-top: 20px;
 }
 
+.errors {
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #ffcccc;
+    color: #cc0000;
+}
+
+.custom-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.custom-button:hover {
+    background-color: #0056b3;
+}
+
+.center-button {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+}

@@ -7,6 +7,8 @@ $dbname = "moduleconnexion";
 
 session_start();
 
+$errors = array();
+
 try {
     // Créer une connexion
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
@@ -43,21 +45,18 @@ try {
                 }
                 exit;
             } else {
-                echo "Mot de passe incorrect";
+                $errors[] = "Mot de passe incorrect";
             }
         } else {
-            echo "Login incorrect";
+            $errors[] = "Login incorrect";
         }
     }
 } catch(PDOException $e) {
-    echo "Erreur: " . $e->getMessage();
+    $errors[] = "Erreur: " . $e->getMessage();
 }
 
 $conn = null;
 ?>
-
-<!-- Reste du code HTML... -->
-
 
 <!DOCTYPE html>
 <html>
@@ -72,8 +71,9 @@ $conn = null;
             <label for="login">Login:</label>
             <input type="text" id="login" name="login">
             <label for="password">Mot de passe:</label>
-            <input type="password" id="password" name="password">
-            <input type="submit" value="Se connecter">
+            <input type="password" id="password" name="password"><br>
+            <input type="submit" value="Se connecter" class="custom-button">
+            <a href="index.php" class="button custom-button">Retour à l'accueil</a>
         </form>
     </div>
 </body>

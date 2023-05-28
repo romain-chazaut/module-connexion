@@ -5,6 +5,8 @@ $username = "root";
 $password = "Romain-1964"; 
 $dbname = "moduleconnexion";
 
+$errors = array();
+
 try {
     // Créer une connexion
     $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
@@ -21,8 +23,7 @@ try {
 
         // Vérifier que les mots de passe correspondent
         if ($password != $confirm_password) {
-            echo "Les mots de passe ne correspondent pas";
-            exit;
+            $errors[] = "Les mots de passe ne correspondent pas";
         }
 
         // Vérifier les contraintes du mot de passe
@@ -33,8 +34,7 @@ try {
             !preg_match('/\d/', $password) ||
             !preg_match('/[^A-Za-z\d]/', $password)
         ) {
-            echo "Le mot de passe ne respecte pas les contraintes";
-            exit;
+            $errors[] = "Le mot de passe doit contenir au moins 8 caractères, une majuscule, un caractère spécial, et un chiffre";
         }
 
         // Vérifier si le login existe déjà
@@ -43,30 +43,32 @@ try {
         $stmt->execute();
 
         if ($stmt->rowCount() > 0) {
-            echo "Ce login est déjà utilisé";
-            exit;
+            $errors[] = "Ce login est déjà utilisé";
         }
 
-        // Hacher le mot de passe
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        // Si aucune erreur n'est présente, procéder à l'inscription
+        if(empty($errors)){
+            // Hacher le mot de passe
+            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-        // Insérer l'utilisateur dans la base de données
-        $stmt = $conn->prepare("INSERT INTO utilisateurs (login, prenom, nom, password) VALUES (:login, :prenom, :nom, :password)");
-        $stmt->bindParam(':login', $login);
-        $stmt->bindParam(':prenom', $prenom);
-        $stmt->bindParam(':nom', $nom);
-        $stmt->bindParam(':password', $hashed_password);
+            // Insérer l'utilisateur dans la base de données
+            $stmt = $conn->prepare("INSERT INTO utilisateurs (login, prenom, nom, password) VALUES (:login, :prenom, :nom, :password)");
+            $stmt->bindParam(':login', $login);
+            $stmt->bindParam(':prenom', $prenom);
+            $stmt->bindParam(':nom', $nom);
+            $stmt->bindParam(':password', $hashed_password);
 
-        if ($stmt->execute()) {
-            // Redirection vers la page de connexion
-            header("Location: connexion.php");
-            exit;
-        } else {
-            echo "Erreur lors de l'inscription";
+            if ($stmt->execute()) {
+                // Redirection vers la page de connexion
+                header("Location: connexion.php");
+                exit;
+            } else {
+                $errors[] = "Erreur lors de l'inscription";
+            }
         }
     }
 } catch(PDOException $e) {
-    echo "Erreur: " . $e->getMessage();
+    $errors[] = "Erreur: " . $e->getMessage();
 }
 
 $conn = null;
@@ -81,6 +83,13 @@ $conn = null;
 <body>
     <div class="container">
         <h1>Inscription</h1>
+        <?php if (!empty($errors)): ?>
+        <div class="errors">
+            <?php foreach ($errors as $error): ?>
+                <p><?php echo $error; ?></p>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
         <form method="POST" action="inscription.php">
             <label for="login">Login:</label>
             <input type="text" id="login" name="login">
@@ -91,10 +100,12 @@ $conn = null;
             <label for="password">Mot de passe:</label>
             <input type="password" id="password" name="password">
             <label for="confpassword">Confirmer le mot de passe:</label>
-            <input type="password" id="confpassword" name="confpassword">
-            <input type="submit" value="S'inscrire">
+            <input type="password" id="confpassword" name="confpassword"><br>
+            <input type="submit" value="S'inscrire" class="custom-button"><br>
+            <a href="index.php" class="custom-button">Retour à l'accueil</a>
         </form>
     </div>
 </body>
 </html>
+
 
